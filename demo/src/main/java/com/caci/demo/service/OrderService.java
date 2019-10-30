@@ -28,7 +28,6 @@ public class OrderService {
 	
 	public Customer retrieveCustomer(String customerId) {
 		for (Customer customer : customers) {
-			System.out.println("Printing customer name:"+customer.getId());
 			if (customer.getId().equalsIgnoreCase(customerId)) {
 				return customer;
 			}
@@ -40,11 +39,9 @@ public class OrderService {
 	// Retrieving Order
 	public BrickOrder retrieveOrder(String customerId, String orderId) {
 		Customer customer = retrieveCustomer(customerId);
-		System.out.println("In retrieveOrder method of service"+customerId+"-"+orderId);
 		if (customer == null) {
 			return null;
 		}
-		System.out.println("In retrieveOrder method of service: Found customer");
 		for (BrickOrder bOrder : customer.getBrickOrders()) {
 			System.out.println("In retrieveOrder method of service: OrderId"+bOrder.getOrderId());
 			if (bOrder.getOrderId().equals(orderId)) {
@@ -57,14 +54,11 @@ public class OrderService {
 	
 	// Adding Order
 	public String addOrder(String customerId, int noOfBricks) {
-		System.out.println("In addOrder method buyBricks");
 		Customer customer = retrieveCustomer(customerId);
 
 		if (customer == null) {
-			System.out.println("Could not find customer");
 			return null;
 		}
-		System.out.println("Found customer");
 		String OrderId = customer.getName()+"_"+customer.incrementOrderSeq();
 		BrickOrder bOrder = new BrickOrder(noOfBricks,OrderId,"new");
 		customer.addBrickOrder(bOrder);

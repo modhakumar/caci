@@ -28,7 +28,6 @@ public class OrdersController {
 	@PostMapping(value="/buyBricks", consumes = "application/json")
 	public String buyBricks( @RequestBody NewOrder bOrder ) {
 
-		System.out.println("In controller method buyBricks");
 		return orderService.addOrder(bOrder.getCustomerId(), bOrder.getNoOfBricks());
 		 
 		
@@ -36,20 +35,17 @@ public class OrdersController {
 	
 	@RequestMapping(value="/retrieveOrder/{customerId}/{orderId}", produces = "application/json")
 	public BrickOrder retrieveOrder(@PathVariable String customerId, @PathVariable String orderId) {
-		System.out.println("In controller method retrieveOrder");
 		return orderService.retrieveOrder(customerId, orderId);
 	}
 	
 	
 	@RequestMapping(value="/getAllOrders", produces = "application/json")
 	public List<BrickOrder> getAllOrders() {
-		System.out.println("In controller method getAllOrders");
 		return orderService.getAllOrders();
 	}
 	
 	@RequestMapping(value="/updateOrder/{customerId}/{orderId}/{noOfBricks}")
 	public String updateOrder(@PathVariable String customerId, @PathVariable String orderId, @PathVariable int noOfBricks) {
-		System.out.println("In controller method updateOrder");
 		String updateStatus = orderService.updateOrder(customerId, orderId,noOfBricks);
 		if (updateStatus.equalsIgnoreCase("Failed")) {
 			throw new ResponseStatusException(
@@ -60,7 +56,6 @@ public class OrdersController {
 	
 	@RequestMapping(value="/FullfillOrder/{customerId}/{orderId}")
 	public String FullfillOrder(@PathVariable String customerId, @PathVariable String orderId){
-		System.out.println("In controller method FullfillOrder");
 		String dispatchStatus = orderService.FullfillOrder(customerId, orderId);
 		if (dispatchStatus.equalsIgnoreCase("Failed")) {
 			throw new ResponseStatusException(
