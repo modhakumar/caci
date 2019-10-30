@@ -20,8 +20,12 @@ import com.caci.demo.payloaddto.NewOrder;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 
-class DemoApplicationTests {
+public class DemoApplicationTests {
 
+	public DemoApplicationTests() {
+		
+	}
+	
 	@Test
 	void contextLoads() {
 	}
@@ -42,10 +46,15 @@ class DemoApplicationTests {
 		ResponseEntity<String> response = restTemplate.postForEntity(resourceURL, nOrder, String.class);
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		
-		// Invalid Order
-		resourceURL = "http://localhost:8080/FullfillOrder/invalidCustomer/invalidOrder";
-		ResponseEntity<String> response2 = restTemplate.getForEntity(resourceURL,String.class);
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+	}
+	
+	
+	@Test
+	public void inValidOrders() throws Exception{
+		 
+	    final String resourceURL = "http://localhost:8080/FullfillOrder/invalidCustomer/invalidOrder";
+	    ResponseEntity<String> response2 = restTemplate.getForEntity(resourceURL,String.class);
+	    assertThat(response2.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 	
 	
